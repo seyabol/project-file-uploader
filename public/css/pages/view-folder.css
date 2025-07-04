@@ -1,0 +1,128 @@
+/* ==========================
+   FOLDER PAGES
+   ========================== */
+
+.folder-page {
+   background-color: #f9f9f9;
+   padding: 2rem;
+   font-family: sans-serif;
+}
+
+.folder {
+   width: 50%;
+   max-width: 700px;
+   margin: 0 auto;
+   background-color: #fff;
+   border: 1px solid #ddd;
+   border-radius: 6px;
+   padding: 2rem;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.folder__title {
+   font-size: 2rem;
+   margin-bottom: 1.5rem;
+   color: #333;
+   text-align: center;
+   word-break: break-all;
+}
+
+.folder__edit-link {
+   display: inline-block;
+   margin: 1rem auto 2rem auto;
+   background-color: #ffc107;
+   color: #333;
+   text-decoration: none;
+   padding: 0.5rem 1rem;
+   border-radius: 4px;
+   font-weight: 500;
+   transition: background-color 0.3s ease;
+}
+
+.folder__edit-link:hover {
+   background-color: #e0a800;
+}
+
+.folder__files {
+   margin-top: 2rem;
+}
+
+.folder__section-title {
+   font-size: 1.5rem;
+   color: #444;
+   margin-bottom: 1rem;
+   border-bottom: 1px solid #ddd;
+   padding-bottom: 0.5rem;
+}
+
+.folder__empty {
+   color: #888;
+   font-style: italic;
+}
+
+.folder__file-list {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+}
+
+.folder__file-item {
+   padding: 0.75rem 1rem;
+   border-bottom: 1px solid #eee;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.folder__file-item button {
+   background-color: #dc3545;
+   color: #fff;
+   border: none;
+   padding: 0.4rem 0.8rem;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 0.9rem;
+   transition: background-color 0.3s ease;
+}
+
+.folder__file-item button:hover {
+   background-color: #b02a37;
+}
+
+.folder__file-item:last-child {
+   border-bottom: none;
+}
+
+.folder__file-link {
+   text-decoration: none;
+   color: #007bff;
+   font-weight: 500;
+   transition: color 0.3s ease;
+}
+
+.folder__file-link:hover {
+   color: #0056b3;
+}
+
+
+.folder__share-form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.folder__share-link {
+  margin-top: 1rem;
+  background: #e0ffe0;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.folder__share-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}

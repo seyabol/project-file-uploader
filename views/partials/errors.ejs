@@ -1,0 +1,6 @@
+<!-- views/partials/errors.ejs -->
+<% if (typeof message !== "undefined" && message) { %>
+  <div class="mb-6 bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded relative" role="alert">
+    <p class="font-medium"><%= message %></p>
+  </div>
+<% } %>

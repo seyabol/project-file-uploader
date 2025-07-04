@@ -1,0 +1,101 @@
+<!-- views/files/dashboard.ejs -->
+<!-- views/files/dashboard.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head', { title: 'Dashboard', pageCss: 'dashboard' }) %>
+
+  <body class="bg-gray-50 min-h-screen flex flex-col">
+    <%- include('../partials/header', { user: user }) %>
+
+    <main class="flex-grow container mx-auto px-4 py-12">
+      <h2 class="text-4xl font-extrabold text-gray-800 mb-10 flex items-center gap-3">
+        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M3 7h18M3 12h18M3 17h18"></path>
+        </svg>
+        Dashboard
+      </h2>
+
+      <% if (error) { %>
+        <%- include('../partials/errors', { message: error }) %>
+      <% } %>
+
+      <% if (success) { %>
+        <%- include('../partials/success', { message: success }) %>
+      <% } %>
+
+      <!-- Folders Section -->
+      <section class="mb-16">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-2xl font-semibold text-gray-700 flex items-center gap-2">
+            <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M3 7h4l2 3h12v11H3z" />
+            </svg>
+            Your Folders
+          </h3>
+          <a href="/dashboard/new" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded shadow transition">
+            ➕ Create New Folder
+          </a>
+        </div>
+
+        <% if (folders.length === 0) { %>
+          <div class="text-center py-8 bg-white border border-dashed border-gray-300 rounded">
+            <p class="text-gray-500 text-lg mb-4">You have no folders yet.</p>
+            <a href="/dashboard/new" class="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition">Create Your First Folder</a>
+          </div>
+        <% } else { %>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% folders.forEach(folder => { %>
+              <li class="bg-white rounded-lg shadow hover:shadow-lg transition p-5">
+                <div class="flex justify-between items-center">
+                  <a href="/dashboard/<%= folder.id %>" class="flex items-center gap-2 text-blue-700 hover:text-blue-900 transition font-medium text-lg">
+                    <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path d="M3 7h4l2 3h12v11H3z" />
+                    </svg>
+                    <%= folder.name %>
+                  </a>
+                  <form action="/dashboard/<%= folder.id %>/delete" method="POST">
+                    <button type="submit" class="text-red-600 hover:text-red-800 text-sm font-semibold transition">
+                      Delete
+                    </button>
+                  </form>
+                </div>
+              </li>
+            <% }); %>
+          </ul>
+        <% } %>
+      </section>
+
+      <!-- Files Without Folder Section -->
+      <section>
+        <h3 class="text-2xl font-semibold text-gray-700 mb-6 flex items-center gap-2">
+          <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 4h16v16H4z"></path>
+          </svg>
+          Files without Folder
+        </h3>
+
+        <% if (noFolderFiles.length === 0) { %>
+          <div class="text-center py-8 bg-white border border-dashed border-gray-300 rounded">
+            <p class="text-gray-500 text-lg">No files outside folders.</p>
+          </div>
+        <% } else { %>
+          <ul class="space-y-4">
+            <% noFolderFiles.forEach(file => { %>
+              <li class="flex justify-between items-center bg-white rounded-lg shadow p-4 hover:shadow-lg transition">
+                <a href="/file/<%= file.id %>" class="flex items-center gap-2 text-gray-800 font-medium hover:text-blue-600 transition">
+                  <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M4 4h16v16H4z"></path>
+                  </svg>
+                  <%= file.filename %>
+                </a>
+                <span class="text-gray-500 text-sm"><%= (file.size / 1024).toFixed(1) %> KB</span>
+              </li>
+            <% }); %>
+          </ul>
+        <% } %>
+      </section>
+    </main>
+
+    <%- include('../partials/footer') %>
+  </body>
+</html>

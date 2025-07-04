@@ -1,0 +1,25 @@
+<!-- views\partials\navigation.ejs -->
+<nav>
+   <ul class="flex space-x-4">
+      <% if (user) { %>
+      <li>
+         <a href="/dashboard" class="text-gray-700 hover:text-blue-600 transition font-medium">Dashboard</a>
+      </li>
+      <li>
+         <a href="/file/upload" class="text-gray-700 hover:text-blue-600 transition font-medium">Upload File</a>
+      </li>
+      <li>
+         <form action="/auth/logout" method="POST">
+            <button class="text-gray-700 hover:text-red-500 transition font-medium" type="submit">Logout</button>
+         </form>
+      </li>
+      <% } else { %>
+      <li>
+         <a href="/auth/login" class="text-gray-700 hover:text-blue-600 transition font-medium">Login</a>
+      </li>
+      <li>
+         <a href="/auth/register" class="text-gray-700 hover:text-green-600 transition font-medium">Register</a>
+      </li>
+      <% } %>
+   </ul>
+</nav>

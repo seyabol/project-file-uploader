@@ -1,0 +1,114 @@
+<!-- views/files/viewFolder.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+   <%- include('../partials/head', { title: 'View Folder', pageCss: 'view-folder' }) %>
+
+   <body class="bg-gray-50 min-h-screen flex flex-col">
+      <%- include('../partials/header', { user: user }) %>
+
+      <main class="flex-grow container mx-auto px-4 py-12">
+         <div class="bg-white shadow rounded-lg w-full max-w-3xl mx-auto p-8">
+            <div class="flex justify-between items-center mb-8">
+               <h2 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
+                  <svg
+                     class="w-8 h-8 text-yellow-500"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     viewBox="0 0 24 24"
+                  >
+                     <path d="M3 7h4l2 3h12v11H3z" />
+                  </svg>
+                  <%= folder.name %>
+               </h2>
+               <a
+                  href="/dashboard/<%= folder.id %>/edit"
+                  class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded hover:bg-blue-700 transition"
+               >
+                  Edit Folder
+               </a>
+            </div>
+
+            <% if (error) { %> <%- include('../partials/errors', { message: error }) %> <% } %> <% if (success) { %> <%-
+            include('../partials/success', { message: success }) %> <% } %>
+
+            <!-- Files Section -->
+            <section class="mb-12">
+               <h3 class="text-2xl font-semibold text-gray-700 mb-6">Files</h3>
+
+               <% if (folder.files.length === 0) { %>
+               <p class="text-gray-500 italic">No files in this folder.</p>
+               <% } else { %>
+               <ul class="space-y-4">
+                  <% folder.files.forEach(file => { %>
+                  <li
+                     class="flex justify-between items-center bg-gray-50 border border-gray-200 rounded p-4 hover:bg-gray-100 transition"
+                  >
+                     <a href="/file/<%= file.id %>" class="text-gray-800 font-medium hover:text-blue-600 transition">
+                        <%= file.filename %>
+                     </a>
+                     <form action="/file/<%= file.id %>/delete" method="post">
+                        <button
+                           type="submit"
+                           class="text-sm text-red-600 hover:text-red-800 hover:underline transition"
+                        >
+                           Delete
+                        </button>
+                     </form>
+                  </li>
+                  <% }) %>
+               </ul>
+               <% } %>
+            </section>
+
+            <!-- Share Section -->
+            <section>
+               <h3 class="text-2xl font-semibold text-gray-700 mb-6 flex items-center gap-2">
+                  <svg
+                     class="w-6 h-6 text-purple-600"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     viewBox="0 0 24 24"
+                  >
+                     <path d="M4 12h16M12 4v16" />
+                  </svg>
+                  Share Folder
+               </h3>
+
+               <% if (sharedLink) { %>
+               <div class="bg-purple-50 border border-purple-200 rounded p-4 mb-6">
+                  <p class="text-gray-700 mb-2">
+                     This folder is already shared:
+                     <a href="<%= sharedLink.url %>" class="text-purple-600 hover:underline"><%= sharedLink.url %></a>
+                  </p>
+                  <p class="text-gray-600 text-sm">Expires at: <%= sharedLink.expiresAt.toLocaleString() %></p>
+               </div>
+               <% } %>
+
+               <form action="/dashboard/<%= folder.id %>/share" method="POST" class="space-y-4">
+                  <label for="duration" class="block text-sm font-medium text-gray-700">
+                     Generate new link (old one will be removed). Duration (e.g. 1d, 10d, 5h)
+                  </label>
+                  <input
+                     type="text"
+                     name="duration"
+                     id="duration"
+                     class="block w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                     required
+                  />
+
+                  <button
+                     type="submit"
+                     class="w-full inline-flex justify-center items-center px-4 py-2 bg-purple-600 text-white text-sm font-semibold rounded hover:bg-purple-700 transition"
+                  >
+                     Generate Share Link
+                  </button>
+               </form>
+            </section>
+         </div>
+      </main>
+
+      <%- include('../partials/footer') %>
+   </body>
+</html>
