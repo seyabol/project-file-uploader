@@ -103,13 +103,47 @@ const updateFolder = async (req, res) => {
    req.flash("success", "Folder updated!");
    res.redirect("/dashboard");
 };
+
 // /dashboard/:id/delete POST
 const deleteFolder = async (req, res) => {
-   await prisma.folder.delete({
-      where: { id: parseInt(req.params.id) },
-   });
-   req.flash("success", "Folder Deleted");
-   res.redirect("/dashboard");
+   const folderId = parseInt(req.params.id);
+
+   try {
+      // Find if there’s a shared link
+      const folder = await prisma.folder.findUnique({
+         where: { id: folderId },
+         include: { sharedLink: true },
+      });
+
+      if (!folder) {
+         req.flash("error", "Folder not found.");
+         return res.redirect("/dashboard");
+      }
+
+      // If a shared link exists, delete it first
+      if (folder.sharedLink) {
+         await prisma.sharedLink.delete({
+            where: { id: folder.sharedLink.id },
+         });
+      }
+
+      // Optionally delete files in the folder (depends on your business logic)
+      await prisma.file.deleteMany({
+         where: { folderId },
+      });
+
+      // Now delete the folder
+      await prisma.folder.delete({
+         where: { id: folderId },
+      });
+
+      req.flash("success", "Folder deleted.");
+      res.redirect("/dashboard");
+   } catch (err) {
+      console.error(err);
+      req.flash("error", "Could not delete folder.");
+      res.redirect("/dashboard");
+   }
 };
 
 // /dashboard/:id/share POST
