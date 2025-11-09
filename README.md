@@ -3,7 +3,6 @@
 
 > **A full-stack Node.js application for secure file storage, sharing, and folder management.**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
