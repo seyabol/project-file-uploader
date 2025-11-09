@@ -1,5 +1,5 @@
 
-# 📂 File Uploader (MyDrive)
+#  File Uploader (MyDrive)
 
 > **A full-stack Node.js application for secure file storage, sharing, and folder management.**
 
@@ -7,7 +7,7 @@
 
 ---
 
-## 🚀 Overview
+##  Overview
 
 **Project File Uploader** is a cloud-based file management system built with:
 
@@ -22,47 +22,47 @@
 
 ---
 
-## 🎯 Features
+##  Features
 
-✅ **User Authentication**
+ **User Authentication**
 
 * Register, login, and logout, reset password
 * Session-based security with `express-session` and Passport
 
-✅ **Folder & File Management**
+ **Folder & File Management**
 
 * Create folders
 * Upload files
 * View and manage folder contents
 * File details view
 
-✅ **File Sharing**
+ **File Sharing**
 
 * Generate unique shareable links for files or folders
 * Share folders with specific users
 
-✅ **Cloud Storage**
+ **Cloud Storage**
 
 * Uploads stored securely in Cloudinary
 
-✅ **Responsive UI**
+ **Responsive UI**
 
 * Tailwind CSS-based design
 * Works across desktop and mobile
 
-✅ **Error Handling**
+ **Error Handling**
 
 * Flash messages for user feedback
 * Global error pages
 
-✅ **Security**
+ **Security**
 
 * Input validation with `express-validator`
 * Environment-based configuration
 
 ---
 
-## 📸 Screenshots
+##  Screenshots
 
 ## Dashboard
 ![Dashboard file ](screenshots/dashboard.png) 
@@ -81,7 +81,7 @@
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 | Tech              | Description                      |
 | ----------------- | -------------------------------- |
